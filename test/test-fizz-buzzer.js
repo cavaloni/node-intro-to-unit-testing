@@ -2,38 +2,50 @@ const should = require('chai').should();
 
 const fizzBuzzer = require('../fizzBuzzer');
 
-describe('fizzBuzzer', function() {
+describe('fizzBuzzer', function () {
+  it('should return fizz-buzz for multiples of 15', function () {
 
-  it('should return "fizz-buzz" for multiples of 15', function() {
-    [15, 30, 45].forEach(function(input) {
-      fizzBuzzer(input).should.equal('fizz-buzz');
+    const normalCases = [{
+      num: 15,
+      expected: 'fizz-buzz'
+    }, {
+      num: 45,
+      expected: 'fizz-buzz'
+    }, {
+      num: 30,
+      expected: 'fizz-buzz'
+    }];
+
+    normalCases.forEach(function (input) {
+      const answer = fizzBuzzer(input.num);
+      answer.should.equal(input.expected);
     });
   });
 
-  it('should return "fizz" for multiples of 3', function() {
-    [3, 6, 9, 12].forEach(function(input) {
-      fizzBuzzer(input).should.equal('fizz');
-    });
-  });
+  it('should return fizz for multiples of 3', function () {
+    const normalCases = [{
+      num: 3,
+      expected: 'fizz'
+    }, {
+      num: 9,
+      expected: 'fizz'
+    }, {
+      num: 12,
+      expected: 'fizz'
+    }];
 
-  it('should return "buzz" for multiples of 5', function() {
-    [5, 10, 20].forEach(function(input) {
-      fizzBuzzer(input).should.equal('buzz');
+    normalCases.forEach(function (input) {
+      const answer = fizzBuzzer(input.num);
+      answer.should.equal(input.expected);
+    })
     });
-  });
 
-  it('should return number if not mult of 3 or 5', function() {
-    [1, 2, 4, 7].forEach(function(input) {
-      fizzBuzzer(input).should.equal(input);
-    });
-  });
-
-  it('should produce error if input isn\'t number', function() {
-    const badInputs = [true, false, 'cat', function() {}, [1, 2, 3]]
-    badInputs.forEach(function(input) {
-      (function() {
+    it('should throw an error if the input is not a number', function () {
+      const badInputs = ['butt', 'face', 'word'];
+      badInputs.forEach(function (input) {
+        (function () {
           fizzBuzzer(input)
-      }).should.throw(Error);
+        }).should.throw(Error);
+      });
     });
   });
-});
